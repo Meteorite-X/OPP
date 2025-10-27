@@ -1,11 +1,10 @@
 #include <iostream>
 #include <cmath>
 #include <cstring>
-#include <cstdlib> // rand() ашиглахад
-#include <ctime>   // time() ашиглахад
+#include <cstdlib> 
+#include <ctime>   
 using namespace std;
 
-// ===== Shape класс =====
 class Shape {
 protected:
     char *name;
@@ -21,12 +20,11 @@ public:
     virtual ~Shape() {
         delete [] name;
     }
-    virtual float area() { return 0; }        // virtual функц — override-д ашиглана
+    virtual float area() { return 0; }        
     virtual float perimeter() { return 0; }
     char* get_name() { return name; }
 };
 
-// ===== 2DShape класс =====
 class TwoDShape : public Shape {
 protected:
     float *x;
@@ -51,7 +49,6 @@ public:
     }
 };
 
-// ===== Circle класс =====
 class Circle : public TwoDShape {
     float radius;
 public:
@@ -67,7 +64,6 @@ public:
     }
 };
 
-// ===== Square класс =====
 class Square : public TwoDShape {
     float side;
 public:
@@ -81,7 +77,6 @@ public:
     }
 };
 
-// ===== Triangle класс =====
 class Triangle : public TwoDShape {
     float side;
 public:
@@ -95,18 +90,15 @@ public:
     }
 };
 
-// ===== Гол програм =====
 int main() {
     srand(time(0));
 
-    // Объект үүсгэх, хуулах жишээ
     TwoDShape o;
     Square s;
     Circle c;
     Triangle t;
-    o = s; o = c; o = t;   // энгийн даалгаврын санааг дүрслэв
+    o = s; o = c; o = t;   
 
-    // Олон дүрсийн массив үүсгэх
     TwoDShape *p[10];
 
     for (int i = 0; i < 10; i++) {
@@ -115,7 +107,6 @@ int main() {
         if (i % 3 == 2) p[i] = new Triangle(rand() % 10 + 1);
     }
 
-    // Талбайгаар эрэмбэлэх (bubble sort)
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 9; j++) {
             if (p[j]->area() > p[j + 1]->area()) {
@@ -131,7 +122,6 @@ int main() {
         p[i]->show_info();
     }
 
-    // Санах ойг чөлөөлнө
     for (int i = 0; i < 10; i++) delete p[i];
 
     return 0;
